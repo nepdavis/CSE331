@@ -4,6 +4,7 @@ from alphabetizer import *
 
 
 class Person:
+
     def __init__(self, first, last, email):
         self.first = first
         self.last = last
@@ -21,6 +22,7 @@ class Person:
 
 
 def load_file(filename):
+
     members = []
 
     with open(filename, 'r') as reader:
@@ -37,11 +39,14 @@ def load_file(filename):
 
 
 def write_file(filename, memberlist):
+
     with open(filename, 'w') as writer:
+
         writer.writelines(str(member) + '\n' for member in memberlist)
 
 
 def main(infile, outfile):
+
     order = order_first_name
     # order = order_second_name
 
@@ -50,6 +55,7 @@ def main(infile, outfile):
     (sorted_list, cost) = alphabetize(member_list, order)
 
     if not is_alphabetized(sorted_list, order):
+
         print('Sorting was not successful!')
 
     print(cost, 'comparisons were required')
@@ -58,5 +64,6 @@ def main(infile, outfile):
 
 
 if __name__ == '__main__':
+
     main('gryffindor.txt', 'sorted.txt')
 # main('short.txt', 'sorted.txt')
