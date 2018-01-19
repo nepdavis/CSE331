@@ -65,7 +65,7 @@ def alphabetize(roster, ordering):
 
     while i < len(top) and j < len(bottom):
 
-        if top[i] < bottom[j]:
+        if ordering(top[i], bottom[j]):
 
             all[k] = top[i]
 
