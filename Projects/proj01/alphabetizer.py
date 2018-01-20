@@ -32,8 +32,6 @@ def merge(a, b, ordering, comparisons):
 
         c += a[i:]
 
-    print(c)
-
     return c
 
 
