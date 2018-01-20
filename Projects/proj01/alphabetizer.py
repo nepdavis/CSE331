@@ -62,7 +62,15 @@ def order_first_name(a, b):
     :return: True if a comes before b alphabetically and False otherwise
     """
 
-    if a.first < b.first:
+    if a.first == b.first:
+
+        if a.last < b.last:
+
+            return True
+
+        return False
+
+    elif a.first < b.first:
 
         return True
 
