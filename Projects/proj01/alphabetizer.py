@@ -32,23 +32,25 @@ def merge(a, b, ordering, comparisons):
 
         c += a[i:]
 
-    return c
+    return c, comparisons
 
 
 def merge_sort(roster, ordering, comparisons):
 
     if len(roster) == 1:
 
-        return roster
+        return roster, comparisons
 
     else:
 
-        a = merge_sort(roster[:len(roster) // 2], ordering, comparisons)
-        b = merge_sort(roster[len(roster) // 2:], ordering, comparisons)
+        a, comparisons = merge_sort(roster[:len(roster) // 2], ordering,
+                                    comparisons)
+        b, comparisons = merge_sort(roster[len(roster) // 2:], ordering,
+                                    comparisons)
 
-        c = merge(a, b, ordering, comparisons)
+        c, comparisons = merge(a, b, ordering, comparisons)
 
-        return c
+        return c, comparisons
 
 
 def order_first_name(a, b):
@@ -133,4 +135,4 @@ def alphabetize(roster, ordering):
 
     comparisons = 0
 
-    return merge_sort(roster, ordering, comparisons), comparisons
+    return merge_sort(roster, ordering, comparisons)
