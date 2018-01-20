@@ -107,7 +107,18 @@ def is_alphabetized(roster, ordering):
     :param ordering: a function comparing two elements
     :return: True if the roster is alphabetized and False otherwise
     """
-    return False
+
+    i = 0
+
+    while i < len(roster) - 1:
+
+        if not ordering(roster[i], roster[i + 1]):
+
+            return False
+
+        i += 1
+
+    return True
 
 
 def alphabetize(roster, ordering):
