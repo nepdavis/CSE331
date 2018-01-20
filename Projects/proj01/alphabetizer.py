@@ -1,3 +1,58 @@
+def merge(a, b, ordering, comparisons):
+
+    i, j, k = 0, 0, 0
+
+    c = [None for _ in range(len(a) + len(b))]
+
+    while i < len(a) and j < len(b):
+
+        if ordering(a[i], b[j]):
+
+            c[k] = a[i]
+
+            comparisons += 1
+            k += 1
+            i += 1
+
+        else:
+
+            c[k] = b[j]
+
+            comparisons += 1
+            k += 1
+            j += 1
+
+    c = c[:i + j]
+
+    if i == len(a):
+
+        c += b[j:]
+
+    else:
+
+        c += a[i:]
+
+    print(c)
+
+    return c
+
+
+def merge_sort(roster, ordering, comparisons):
+
+    if len(roster) == 1:
+
+        return roster
+
+    else:
+
+        a = merge_sort(roster[:len(roster) // 2], ordering, comparisons)
+        b = merge_sort(roster[len(roster) // 2:], ordering, comparisons)
+
+        c = merge(a, b, ordering, comparisons)
+
+        return c
+
+
 def order_first_name(a, b):
 
     """
@@ -7,7 +62,7 @@ def order_first_name(a, b):
     :return: True if a comes before b alphabetically and False otherwise
     """
 
-    if a.first() < b.first():
+    if a.first < b.first:
 
         return True
 
@@ -23,7 +78,15 @@ def order_last_name(a, b):
     :return: True if a comes before b alphabetically and False otherwise
     """
 
-    if a.last() < b.last():
+    if a.last == b.last:
+
+        if a.first < b.first:
+
+            return True
+
+        return False
+
+    elif a.last < b.last:
 
         return True
 
@@ -53,32 +116,4 @@ def alphabetize(roster, ordering):
 
     comparisons = 0
 
-    top = roster[:len(roster)//2]
-
-    bottom = roster[len(roster)//2:]
-
-    all = [None for _ in range(len(roster))]
-
-    i, j = 0, 0
-
-    k = len(roster)
-
-    while i < len(top) and j < len(bottom):
-
-        if ordering(top[i], bottom[j]):
-
-            all[k] = top[i]
-
-            comparisons += 1
-            k += 1
-            i += 1
-
-        else:
-
-            all[k] = bottom[j]
-
-            comparisons += 1
-            k += 1
-            j += 1
-
-    return list(roster), 0
+    return merge_sort(roster, ordering, comparisons), comparisons
