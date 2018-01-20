@@ -47,8 +47,8 @@ def write_file(filename, memberlist):
 
 def main(infile, outfile):
 
+    # order = order_last_name
     order = order_first_name
-    # order = order_second_name
 
     member_list = load_file(infile)
 
@@ -66,4 +66,4 @@ def main(infile, outfile):
 if __name__ == '__main__':
 
     main('gryffindor.txt', 'sorted.txt')
-# main('short.txt', 'sorted.txt')
+    # main('short.txt', 'sorted.txt')
