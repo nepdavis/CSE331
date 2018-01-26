@@ -110,18 +110,25 @@ def order_first_name(a, b):
     :return: True if a comes before b alphabetically and False otherwise
     """
 
+    # if same first name
     if a.first == b.first:
 
+        # if a last name comes before b last name
         if a.last < b.last:
 
+            # a comes before b
             return True
 
+        # else, b comes before a
         return False
 
+    # if a first name comes before b first name
     elif a.first < b.first:
 
+        # a comes before b
         return True
 
+    # else, b comes before a
     return False
 
 
@@ -134,18 +141,25 @@ def order_last_name(a, b):
     :return: True if a comes before b alphabetically and False otherwise
     """
 
+    # if same last name
     if a.last == b.last:
 
+        # if a first name comes before b first name
         if a.first < b.first:
 
+            # a comes before b
             return True
 
+        # else, b comes before a
         return False
 
+    # if a last name comes before b last name
     elif a.last < b.last:
 
+        # a comes before b
         return True
 
+    # else, b comes before a
     return False
 
 
