@@ -1,37 +1,66 @@
 def merge(a, b, ordering, comparisons):
 
+    """
+    Merges two sorted lists by sorting them iteratively and storing them in
+    a new list c
+    :param a: a sorted list
+    :param b: a second sorted list
+    :param ordering: the type of ordering (either first or last name)
+    :param comparisons: current total number of comparisons made
+    :return: the merged list c and the updated total number of comparisons
+    """
+
+    # set indices to 0
     i, j, k = 0, 0, 0
 
+    # initialize list c of None's for merging
     c = [None for _ in range(len(a) + len(b))]
 
+    # as long as a and b indices are not out of range
     while i < len(a) and j < len(b):
 
+        # if a comes before b based on ordering
         if ordering(a[i], b[j]):
 
+            # entry of c is entry of a
             c[k] = a[i]
 
+            # update comparisons
             comparisons += 1
+
+            # move on to next entry of c and a
             k += 1
             i += 1
 
+        # if b comes before a based on ordering
         else:
 
+            # entry of c is entry of b
             c[k] = b[j]
 
+            # update comparisons
             comparisons += 1
+
+            # move on to next entry of c and b
             k += 1
             j += 1
 
+    # remove the None's from the end of the list that were not replaced
     c = c[:i + j]
 
+    # if all of a was added to c
     if i == len(a):
 
+        # add the rest of b to c
         c += b[j:]
 
+    # if all of b was added to c
     else:
 
+        # add the rest of a to c
         c += a[i:]
 
+    # return the merged list c and the new total number of comparisons
     return c, comparisons
 
 
