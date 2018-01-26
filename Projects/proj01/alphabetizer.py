@@ -66,19 +66,38 @@ def merge(a, b, ordering, comparisons):
 
 def merge_sort(roster, ordering, comparisons):
 
+    """
+    Begins merge sort algorithm - continues recursion until split lists only
+    have a single component and then combines sorted lists until there returns
+    one fully combined sorted list and total number of comparisons needed for
+    sorting
+    :param roster: unsorted list to be sorted
+    :param ordering: type of ordering (either first or second name)
+    :param comparisons: total current number of comparisons (0 at first)
+    :return: fully sorted original list and total number of comparisons needed
+    """
+
+    # if list only has one component
     if len(roster) == 1:
 
+        # return "sorted" list and total number of current comparisons
         return roster, comparisons
 
+    # if list length greater than 1
     else:
 
+        # split list into first half and call recursion on it
         a, comparisons = merge_sort(roster[:len(roster) // 2], ordering,
                                     comparisons)
+
+        # split list into second half and call recursion on it
         b, comparisons = merge_sort(roster[len(roster) // 2:], ordering,
                                     comparisons)
 
+        # merge two lists using merge() and save merged list and new comps
         c, comparisons = merge(a, b, ordering, comparisons)
 
+        # return merged sorted list c and updated total number of comparisons
         return c, comparisons
 
 
