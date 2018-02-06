@@ -9,7 +9,7 @@ class Deque:
         """
         Initializes an empty Deque
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
 
         self.data = [None] * 10
@@ -63,10 +63,18 @@ class Deque:
         Inserts an element at the front of the Deque
         :param e: An element to insert
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
 
-        pass
+        if self.size == len(self.data):
+
+            self.resize(2 * len(self.data))
+
+        avail = (self.front - 1) % len(self.data)
+
+        self.data[avail] = e
+
+        self.size += 1
 
     def push_back(self, e):
 
@@ -74,10 +82,18 @@ class Deque:
         Inserts an element at the back of the Deque
         :param e: An element to insert
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
 
-        pass
+        if self.size == len(self.data):
+
+            self.resize(2 * len(self.data))
+
+        avail = (self.front + self.size) % len(self.data)
+
+        self.data[avail] = e
+
+        self.size += 1
 
     def pop_front(self):
 
@@ -184,3 +200,29 @@ class Deque:
         """
 
         return 'Deque([{0}])'.format(','.join(str(item) for item in self))
+
+    # helper methods
+
+    def resize(self, new_size):
+
+        """
+
+        :param new_size:
+        :return:
+
+        FINISHED, NEEDS TESTING
+        """
+
+        old_data = self.data
+
+        self.data = [None] * new_size
+
+        old_index = self.front
+
+        for i in range(self.size):
+
+            self.data[i] = old_data[old_index]
+
+            old_index = (1 + old_index) % len(old_data)
+
+        self.front = 0
