@@ -12,8 +12,9 @@ class Deque:
         NOT FINISHED
         """
 
-        self.front = None
-        self.back = None
+        self.data = [None] * 10
+        self.front = 0
+        self.size = 0
 
     def __len__(self):
 
@@ -24,7 +25,7 @@ class Deque:
         FINISHED, NEEDS TESTING
         """
 
-        return len(self)
+        return self.size
 
     def peek_front(self):
 
@@ -39,7 +40,7 @@ class Deque:
 
             raise IndexError
 
-        return self.front
+        return self.data[self.front]
 
     def peek_back(self):
 
@@ -54,7 +55,7 @@ class Deque:
 
             raise IndexError
 
-        return self.back
+        return self.data[(self.front + self.size - 1) % len(self.data)]
 
     def push_front(self, e):
 
@@ -64,6 +65,7 @@ class Deque:
 
         NOT FINISHED
         """
+
         pass
 
     def push_back(self, e):
@@ -74,6 +76,7 @@ class Deque:
 
         NOT FINISHED
         """
+
         pass
 
     def pop_front(self):
@@ -82,9 +85,22 @@ class Deque:
         Removes and returns the first element
         :return: The (former) first element
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
-        raise IndexError
+
+        if self.is_empty():
+
+            raise IndexError
+
+        first = self.data[self.front]
+
+        self.data[self.front] = None
+
+        self.front = (self.front + 1) % len(self.data)
+
+        self.size -= 1
+
+        return first
 
     def pop_back(self):
 
@@ -92,9 +108,20 @@ class Deque:
         Removes and returns the last element
         :return: The (former) last element
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
-        raise IndexError
+
+        if self.is_empty():
+
+            raise IndexError
+
+        last = self.data[(self.front + self.size - 1) % len(self.data)]
+
+        self.data[(self.front + self.size - 1) % len(self.data)] = None
+
+        self.size -= 1
+
+        return last
 
     def clear(self):
 
@@ -102,9 +129,12 @@ class Deque:
         Removes all elements from the Deque
         :return:
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
-        pass
+
+        self.data = [None] * 10
+        self.front = 0
+        self.size = 0
 
     def retain_if(self, condition):
 
@@ -115,6 +145,7 @@ class Deque:
 
         NOT FINISHED
         """
+
         pass
 
     def __iter__(self):
@@ -123,9 +154,12 @@ class Deque:
         Iterates over this Deque from front to back
         :return: An iterator
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
-        pass
+
+        for i in self.data:
+
+            yield i
 
     # provided functions
 
@@ -135,7 +169,7 @@ class Deque:
         Checks if the Deque is empty
         :return: True if the Deque contains no elements, False otherwise
 
-        FINISHED
+        FINISHED, NEEDS TESTING
         """
 
         return len(self) == 0
@@ -146,8 +180,7 @@ class Deque:
         A string representation of this Deque
         :return: A string
 
-        FINISHED
+        FINISHED, NEEDS TESTING
         """
 
         return 'Deque([{0}])'.format(','.join(str(item) for item in self))
-
