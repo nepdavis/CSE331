@@ -76,6 +76,8 @@ class Deque:
 
         self.size += 1
 
+        self.front -= 1
+
     def push_back(self, e):
 
         """
@@ -145,10 +147,13 @@ class Deque:
         Removes all elements from the Deque
         :return:
 
-        FINISHED, NEEDS TESTING
+        FINISHED, NEEDS TESTING (MAY NEED TO BE CHANGED TO O(N) TIME)
         """
 
-        self.data = [None] * 10
+        for i in range(len(self.data)):
+
+            self.data[i] = None
+
         self.front = 0
         self.size = 0
 
@@ -159,10 +164,21 @@ class Deque:
         condition remain
         :param condition: A boolean function that tests elements
 
-        NOT FINISHED
+        FINISHED, NEEDS TESTING
         """
 
-        pass
+        locs = []
+
+        for i in range(len(self.data)):
+
+            if not condition(self.data[i]) and self.data[i] is not None:
+
+                locs.append(i)
+
+                self.size -= 1
+
+        self.data = [self.data[i] for i in range(len(self.data)) if i not in
+                     locs]
 
     def __iter__(self):
 
