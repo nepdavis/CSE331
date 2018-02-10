@@ -2,6 +2,8 @@ class Deque:
 
     """
     A double-ended queue
+
+    Implemented using circular array method
     """
 
     def __init__(self):
@@ -193,7 +195,7 @@ class Deque:
         for i in range(len(self.data)):
 
             # if condition does not hold and an element exists at that loc
-            if not condition(self.data[i]) and self.data[i] is not None:
+            if self.data[i] is not None and (not condition(self.data[i])):
 
                 # then append that index to the list of indices
                 locs.append(i)
