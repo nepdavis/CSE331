@@ -16,32 +16,133 @@ class TreeSet:
         """
 
         self.comp = comp
+        self.node = None
+        self.size = 0
 
     def __len__(self):
-        return 0
+
+        return self.size
 
     def height(self):
-        return -1
+
+        if self.node is None:
+
+            return -1
+
+        return 1 + max(self.node.left.height(), self.node.right.height())
 
     def insert(self, item):
-        return False
+
+        if self.node is None:
+
+            self.node = TreeNode(item)
+
+            self.size += 1
+
+            return True
+
+        elif self.comp(item, self.node.data) == 0:
+
+            return False
+
+        elif self.comp(item, self.node.data) < 0:
+
+            self.node.left.insert(item)
+
+        elif self.comp(item, self.node.data) > 0:
+
+            self.node.right.insert(item)
+
+        # RE-BALANCE
 
     def remove(self, item):
-        return False
+
+        if self.node is None:
+
+            return False
+
+        elif self.comp(item, self.node.data) == 0:
+
+            if self.node.left is None and self.node.right is None:
+
+                self.node = None
+
+            elif self.node.left is None:
+
+                self.node = self.node.right.node
+
+            elif self.node.right is None:
+
+                self.node = self.node.left.node
+
+            else:
+
+                temp = self.node.right
+
+                while temp.left is not None:
+
+                    if temp.left.node is None:
+
+                        break
+
+                    temp = temp.left
+
+                self.node.data = temp.data
+
+                self.node.right.delete(temp.data)
+
+            self.size -= 1
+
+            # RE-BALANCE
+
+        elif self.comp(item, self.node.data) < 0:
+
+            self.node.left.remove(item)
+
+        elif self.comp(item, self.node.data) > 0:
+
+            self.node.right.remove(item)
 
     def __contains__(self, item):
-        return False
+
+        if self.node is None:
+
+            return False
+
+        elif self.comp(item, self.first()) < 0:
+
+            self.node.left.__contains__(item)
+
+        elif self.comp(item, self.first()) > 0:
+
+            self.node.right.__contains__(item)
+
+        else:
+
+            return True
 
     def first(self):
-        raise KeyError
+
+        if self.is_empty():
+
+            raise KeyError
+
+        return False
 
     def last(self):
-        raise KeyError
+
+        if self.is_empty():
+
+            raise KeyError
+
+        return False
 
     def clear(self):
+
         pass
 
     def __iter__(self):
+
         return iter([])
 
     # Pre-defined methods
@@ -63,6 +164,14 @@ class TreeSet:
         """
 
         return 'TreeSet([{0}])'.format(','.join(str(item) for item in self))
+
+    def is_balanced(self):
+
+        if self.node is None:
+
+            return True
+
+        return abs(self.node.left.height() - self.node.right.height()) <= 1
 
 
 class TreeNode:
