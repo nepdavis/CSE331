@@ -1,4 +1,5 @@
 from TreeSet import TreeSet
+import time
 
 
 def natural_order(x, y):
@@ -16,6 +17,9 @@ def case_insensitive_order(x, y):
 
 def main(filename):
     with open(filename, 'r') as reader:
+
+        start_time = time.time()
+
         tree = TreeSet(case_insensitive_order)
         # tree = TreeSet(natural_order)
         for line in reader:
@@ -33,6 +37,8 @@ def main(filename):
         print('length:', len(tree))
         print('first:', tree.first())
         print('last:', tree.last())
+
+        print(time.time() - start_time)
 
 
 if __name__ == '__main__':
