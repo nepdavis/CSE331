@@ -1,5 +1,5 @@
 # CSE331 - Algorithms and Data Structures
--
+
 MSU computer science course on basic algorithms and data structures in Python taught by Dr. James Daly, spring semester 2018
 
 Project implementations below:
